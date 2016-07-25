@@ -37,6 +37,9 @@ public class BazaPostgreSql extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        DialogLogin dialogLogin = new DialogLogin(this);
+        dialogLogin.show();
+
         id_aparatury = (TextView) findViewById(R.id.id_aparatury);
         id_nazwa_aparatury = (TextView) findViewById(R.id.text_id_nazwa_aparatury);
         text_typ = (TextView) findViewById(R.id.text_typ);
@@ -49,6 +52,8 @@ public class BazaPostgreSql extends Activity {
 
         btn_wczytaj = (Button) findViewById(R.id.button_wczytaj);
         edit_podaj_id = (EditText) findViewById(R.id.edit_podaj_id);
+
+
 
         btn_wczytaj.setOnClickListener(new View.OnClickListener() {
             @Override
