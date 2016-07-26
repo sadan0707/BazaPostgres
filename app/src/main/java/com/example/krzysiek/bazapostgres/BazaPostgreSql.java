@@ -28,6 +28,7 @@ public class BazaPostgreSql extends Activity {
     Button btn_wczytaj;
 
     String ET;
+    String login, haslo;
 
     EditText edit_podaj_id;
 
@@ -37,8 +38,6 @@ public class BazaPostgreSql extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        DialogLogin dialogLogin = new DialogLogin(this);
-        dialogLogin.show();
 
         id_aparatury = (TextView) findViewById(R.id.id_aparatury);
         id_nazwa_aparatury = (TextView) findViewById(R.id.text_id_nazwa_aparatury);
@@ -53,13 +52,20 @@ public class BazaPostgreSql extends Activity {
         btn_wczytaj = (Button) findViewById(R.id.button_wczytaj);
         edit_podaj_id = (EditText) findViewById(R.id.edit_podaj_id);
 
+        Bundle extras = getIntent().getExtras();
+
+        haslo = extras.getString("haslo_rot13");
+        login = extras.getString("login");
+
+
+
 
 
         btn_wczytaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ET = edit_podaj_id.getText().toString();
-                new MojeZapytanie().execute(ET);
+                new MojeZapytanie().execute(ET,login, haslo);
             }
         });
 
@@ -84,10 +90,12 @@ public class BazaPostgreSql extends Activity {
                 String url =  "jdbc:postgresql://10.0.0.9:5432/dhs_all";
 
                 String numer = params[0];
+                String login1 = params[1];
+                String haslo1 = params[2];
 
 
 
-                polaczenie = DriverManager.getConnection(url, "read", "read");
+                polaczenie = DriverManager.getConnection(url, login1, haslo1);
                 Statement st = polaczenie.createStatement();
 
                 String zapytanie1 = "select * from ses_wykaz_aparatury where id_aparatury="+numer+";";
@@ -133,9 +141,7 @@ public class BazaPostgreSql extends Activity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                System.err.println(e.getMessage());
-                System.err.println("Error: Cant connect!");
-                polaczenie = null;
+                //Toast.makeText(getApplicationContext(), ,Toast.LENGTH_LONG).show();
             }
 
             return null;
