@@ -1,6 +1,7 @@
 package com.example.krzysiek.bazapostgres;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -22,15 +23,18 @@ public class BazaPostgreSql extends Activity {
     private TextView text_jednostka_org;
     private TextView text_uwagi;
     private TextView text_ost_przeglad;
+    private TextView text_data_uruchomienie;
 
     //  EditText edit_podaj_id;
 
-    Button btn_wczytaj;
+    Button btn_wczytaj_id, btn_wczytaj_model, btn_wczytaj_sn;
 
-    String ET;
+    String EDIT_PODAJ_ID, EDIT_PODAJ_MODEL, EDIT_PODAJ_SN;
     String login, haslo;
 
     EditText edit_podaj_id;
+    EditText edit_podaj_model;
+    EditText edit_podaj_sn;
 
 
     @Override
@@ -46,11 +50,17 @@ public class BazaPostgreSql extends Activity {
         text_jednostka_org = (TextView) findViewById(R.id.text_jednostka_organizacyjna);
         text_uwagi = (TextView) findViewById(R.id.text_uwagi);
         text_ost_przeglad = (TextView) findViewById(R.id.text_ostatni_przeglad);
+        text_data_uruchomienie = (TextView) findViewById(R.id.text_data_instalacji);
 
 
-
-        btn_wczytaj = (Button) findViewById(R.id.button_wczytaj);
+        btn_wczytaj_id = (Button) findViewById(R.id.button_wczytaj);
         edit_podaj_id = (EditText) findViewById(R.id.edit_podaj_id);
+
+        btn_wczytaj_model = (Button) findViewById(R.id.button_wczytaj_model);
+        edit_podaj_model = (EditText) findViewById(R.id.edit_podaj_model);
+
+        btn_wczytaj_sn = (Button) findViewById(R.id.button_wczytaj_sn);
+        edit_podaj_sn = (EditText) findViewById(R.id.edit_podaj_sn);
 
         Bundle extras = getIntent().getExtras();
 
@@ -61,11 +71,27 @@ public class BazaPostgreSql extends Activity {
 
 
 
-        btn_wczytaj.setOnClickListener(new View.OnClickListener() {
+        btn_wczytaj_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ET = edit_podaj_id.getText().toString();
-                new MojeZapytanie().execute(ET,login, haslo);
+                String WHERE = "id_aparatury";
+                EDIT_PODAJ_ID = edit_podaj_id.getText().toString();
+
+
+                EDIT_PODAJ_SN = edit_podaj_sn.getText().toString();
+
+                new MojeZapytanie().execute(EDIT_PODAJ_ID,login, haslo, WHERE);
+            }
+        });
+
+        btn_wczytaj_model.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String WHERE = "typ";
+                EDIT_PODAJ_MODEL = edit_podaj_model.getText().toString();
+
+                new MojeZapytanie().execute(EDIT_PODAJ_MODEL,login, haslo, WHERE);
+
             }
         });
 
@@ -79,6 +105,9 @@ public class BazaPostgreSql extends Activity {
         private String jedn_org;
         private String uwagi;
         private String ost_przeglad;
+        private String data_uruchomienie;
+
+        Cursor c;
 
         @Override
         protected Void doInBackground(String... params) {
@@ -89,23 +118,29 @@ public class BazaPostgreSql extends Activity {
 
                 String url =  "jdbc:postgresql://10.0.0.9:5432/dhs_all";
 
-                String numer = params[0];
+                String numer_ID = params[0];
                 String login1 = params[1];
                 String haslo1 = params[2];
+                String WHERE = params[3];
 
 
 
                 polaczenie = DriverManager.getConnection(url, login1, haslo1);
                 Statement st = polaczenie.createStatement();
 
-                String zapytanie1 = "select * from ses_wykaz_aparatury where id_aparatury="+numer+";";
+                String zapytanie1 = "select * from ses_wykaz_aparatury where "+WHERE+" like '%"+numer_ID+"%';";
                 final ResultSet rs1 = st.executeQuery(zapytanie1);
+
+                //Cursor c = (Cursor) rs1;
                 rs1.next();
+
+
 
                 id = rs1.getString(1);
                 typ = rs1.getString(5);
                 sn = rs1.getString(6);
                 uwagi = rs1.getString(10);
+                data_uruchomienie = rs1.getString("data_do_uzytku");
 
                 String id_nazwa = rs1.getString(2);
                 String id_jednostki_organizacyjnej = rs1.getString(11);
@@ -125,7 +160,7 @@ public class BazaPostgreSql extends Activity {
                 jedn_org = rs3.getString(2);
 
 
-                String zapytanie4 = "select * from ses_odbyte_kontrole where id_aparatury="+numer+";";
+                String zapytanie4 = "select * from ses_odbyte_kontrole where id_aparatury="+id+";";
                 final ResultSet rs4 = st.executeQuery(zapytanie4);
                 rs4.next();
 
@@ -156,6 +191,8 @@ public class BazaPostgreSql extends Activity {
             text_jednostka_org.setText(jedn_org);
             text_uwagi.setText(uwagi);
             text_ost_przeglad.setText(ost_przeglad);
+            text_data_uruchomienie.setText(data_uruchomienie);
+
 
 
 

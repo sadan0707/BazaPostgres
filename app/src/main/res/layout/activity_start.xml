@@ -11,34 +11,90 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Podaj ID:"
+                    android:id="@+id/textView6" />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_podaj_id"
+                    android:layout_marginLeft="10dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wczytaj"
+                    android:id="@+id/button_wczytaj"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Podaj Model"
+                    android:id="@+id/textView12" />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_podaj_model"
+                    android:layout_marginLeft="10dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wczytaj"
+                    android:id="@+id/button_wczytaj_model"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Podaj nr fabr."
+                    android:id="@+id/textView13" />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_podaj_sn"
+                    android:layout_marginLeft="10dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wczytaj"
+                    android:id="@+id/button_wczytaj_sn"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
+        </TableLayout>
+
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Podaj ID:"
-                android:id="@+id/textView6" />
-
-            <EditText
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_podaj_id"
-                android:layout_marginLeft="10dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wczytaj"
-                android:id="@+id/button_wczytaj"
-                android:layout_marginLeft="10dp" />
+            android:layout_height="match_parent">
 
         </LinearLayout>
-
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -117,6 +173,27 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
             android:id="@+id/text_jednostka_organizacyjna" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Instalacji:"
+                android:id="@+id/textView14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/text_data_instalacji"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
