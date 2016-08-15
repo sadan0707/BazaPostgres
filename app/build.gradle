@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile files('libs/postgresql.jar')
+    compile files('libs/com.mysql.jdbc_5.1.5.jar')
+    compile 'junit:junit:4.12'
 }
