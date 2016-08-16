@@ -5,4 +5,5 @@
     <string name="title_activity_DialogLogin">Login</string>
     <string name="title_activity_start_glowny">Bazy Danych</string>
     <string name="title_activity_mysql">MySQL</string>
+    <string name="title_activity_DialogWstaw">Dodaj Nowy Sprzet</string>
 </resources>

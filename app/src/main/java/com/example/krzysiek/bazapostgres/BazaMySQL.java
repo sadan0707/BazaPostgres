@@ -1,6 +1,7 @@
 package com.example.krzysiek.bazapostgres;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,6 +45,8 @@ public class BazaMySQL extends Activity {
         });
 
 
+
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,12 +58,18 @@ public class BazaMySQL extends Activity {
         return  super.onCreateOptionsMenu(menu);
     }
 
+    public void DialogWstaw(View view) {
+
+        Intent intent = new Intent(this, DialogWstaw.class);
+        startActivity(intent);
+    }
+
 
     public class ZapytanieMySQL extends AsyncTask<String,Void,Void> {
 
         int id;
         String  nazwa, model, sn;
-        String URL ="jdbc:mysql://192.168.2.100:3306/sprzety";
+        String URL ="jdbc:mysql://10.0.2.15:3306/sprzety";
         String USER = "krzysiek";
         String HASLO = "Ks1234";
 
@@ -78,33 +87,15 @@ public class BazaMySQL extends Activity {
                 String ID = params[0];
 
                 Statement statement = (Statement) polaczenie.createStatement();
-                ResultSet rezultat2 = statement.executeQuery("select * from wykaz_sprzety");
 
+                ResultSet rezultat = (ResultSet) statement.executeQuery("select * from wykaz_sprzety where id_aparatury="+ID+";");
 
+                rezultat.next();
 
-                //Statement zapis = (Statement) polaczenie.createStatement();
-                //statement.executeUpdate("insert into wykaz_sprzety (id_aparatury, nazwa, model, sn, producent) values ("+ID2+", 'APARAT DO MIERZENIA CISNIENIA', 'CS-2', '1234', 'OMRON')");
-
-                //ResultSet rezultat = (ResultSet) statement.executeQuery("select * from wykaz_sprzety where id_aparatury="+ID+";");
-
-
-                while(rezultat2.next()){
-                    id = rezultat2.getInt(1);
-                    nazwa = rezultat2.getString(2);
-                    model = rezultat2.getString(3);
-                    sn = rezultat2.getString(4);
-
-
-
-                };
-
-                int ID2 = id+1;
-                statement.executeUpdate("insert into wykaz_sprzety (id_aparatury, nazwa, model, sn, producent) values ("+ID2+", 'APARAT DO MIERZENIA CISNIENIA', 'CS-2', '1234', 'OMRON')");
-
-                //rezultat.next();
-
-
-
+                    id = rezultat.getInt(1);
+                    nazwa = rezultat.getString(2);
+                    model = rezultat.getString(3);
+                    sn = rezultat.getString(4);
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

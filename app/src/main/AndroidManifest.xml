@@ -58,6 +58,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".DialogWstaw"
+            android:label="@string/title_activity_DialogWstaw"
+            android:theme="@android:style/Theme.Holo.Dialog">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Start"
             android:label="@string/title_activity_start_glowny">

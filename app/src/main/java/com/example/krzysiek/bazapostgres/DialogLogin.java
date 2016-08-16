@@ -27,7 +27,6 @@ public class DialogLogin  extends Activity {
 
         Button btn_login = (Button) findViewById(R.id.btn_login);
 
-
         }
 
 
@@ -104,10 +103,6 @@ public class DialogLogin  extends Activity {
                     startActivity(cel);
 
                     //Toast.makeText(DialogLogin.this, "BRAK POLACZENIA", Toast.LENGTH_LONG).show();
-
-
-
-
 
 
             } catch (ClassNotFoundException e) {
