@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,24 +44,26 @@ public class BazaMySQL extends Activity {
             }
         });
 
-
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_mysql, menu);
+        return true;
 
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_mysql, menu);
-
-        return  super.onCreateOptionsMenu(menu);
     }
 
-    public void DialogWstaw(View view) {
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_szukaj:
+                return true;
+            case R.id.action_dodaj:
+                Intent intent = new Intent(this, DialogWstaw.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
-        Intent intent = new Intent(this, DialogWstaw.class);
-        startActivity(intent);
     }
 
 

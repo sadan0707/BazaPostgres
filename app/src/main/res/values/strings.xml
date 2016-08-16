@@ -6,4 +6,5 @@
     <string name="title_activity_start_glowny">Bazy Danych</string>
     <string name="title_activity_mysql">MySQL</string>
     <string name="title_activity_DialogWstaw">Dodaj Nowy Sprzet</string>
+    <string name="title_activity_main1">MainActivity1</string>
 </resources>
